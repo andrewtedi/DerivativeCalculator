@@ -82,19 +82,19 @@ public class ChainRule implements DerivativeRule {
 			displace = fh.tanDisplace();
 			
 		}//else if
-		else if(out.equals("sxn")) { //function is sin^-1
+		else if(out.equals("sin^-1")) { //function is sin^-1
 			
 			result += fh.invSinDeriv();
 			displace = fh.invSinDisplace();
 			
 		}//else if
-		else if(out.equals("cxs")) { //function is cos^-1
+		else if(out.equals("cos^-1")) { //function is cos^-1
 			
 			result += fh.invCosDeriv();
 			displace = fh.invCosDisplace();
 			
 		}//else if
-		else if(out.equals("txn")) { //function is tan^-1
+		else if(out.equals("tan^-1")) { //function is tan^-1
 			
 			result += fh.invTanDeriv();
 			displace = fh.invTanDisplace();

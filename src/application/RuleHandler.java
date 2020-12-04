@@ -32,6 +32,21 @@ public class RuleHandler {
 				result = dr.calculateRule(term);
 			
 			}//else if
+			else if(term.contains("sin")&&term.contains("cos") || term.contains("sin")&&term.contains("tan")
+						|| term.contains("cos")&& term.contains("tan")){
+
+				//first multi check
+				//first split functions
+				String delimiter = "((?<=\\))|(?=\\)))";	//split at the ) (where the next function starts
+				String[] termSplit = term.split(delimiter);	//now, parsing
+				termSplit[0] += termSplit[1];	//add the ) back
+				termSplit[2] += termSplit[3];	//add the ) back
+
+				//now, call product rule
+				ProductRule pr = new ProductRule();
+				result = pr.calculateRule(termSplit[0],termSplit[2]);
+
+			}//else if
 			else if(term.contains("*")) {
 			
 				//first split input term
