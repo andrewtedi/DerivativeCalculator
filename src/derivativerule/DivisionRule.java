@@ -31,9 +31,7 @@ public class DivisionRule implements DerivativeRule{
 			
 			String delimiter = "((?<=\\^)|(?=\\^))|";
 			String[] arr = gx.split(delimiter);
-			double temp = Double.parseDouble(arr[2]);
-			temp = temp + -1;
-			gx = (arr[0] + arr[1] + temp);
+			gx = (arr[0] + arr[1] + "-" + arr[2]);
 		}//if
 		else {	//otherwise, adding on ^-1 directly is okay
 			
@@ -47,7 +45,16 @@ public class DivisionRule implements DerivativeRule{
 			result = fx + "/";
 			
 			PowerRule pr = new PowerRule();
-			result += pr.calculateRule(gx);
+			String temp = pr.calculateRule(gx);
+			String delimiter = "((?<=x)|(?=x))";
+			String[] gxArr = temp.split(delimiter);
+			
+			if(gxArr[0].equals("x")) {
+				result += temp;
+			}//if
+			else {
+				result = gxArr[0] + "/" + gxArr[1] + gxArr[2];
+			}//else
 			
 		}//if
 		else {
