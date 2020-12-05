@@ -65,7 +65,7 @@ public class ChainRule implements DerivativeRule {
 		
 		//next term- fx'
 		int displace = 0;
-		if(out.contains("sin")) {	//function is sin
+		if(out.equals("sin")) {	//function is sin
 			result += fh.sinDeriv();
 			displace = fh.sinDisplace();
 		
