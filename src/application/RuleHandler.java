@@ -28,8 +28,13 @@ public class RuleHandler {
 			else if(term.contains("/")) {
 			
 				//call quotient rule
+				//first split input term
+				String delimiter = "((?<=\\/)|(?=\\/))";	//split at the /
+				String[] termSplit = term.split(delimiter);	//now, easy parsing
+				
+				//now, call quotient rule
 				DivisionRule dr = new DivisionRule();
-				result = dr.calculateRule(term);
+				result = dr.calculateRule(termSplit[0],termSplit[2]);
 			
 			}//else if
 			else if(term.contains("sin")&&term.contains("cos") || term.contains("sin")&&term.contains("tan")

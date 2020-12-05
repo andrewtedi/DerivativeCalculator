@@ -50,19 +50,19 @@ public class ProductRule implements DerivativeRule{
 			displace = fh.tanDisplace();
 			
 		}//else if
-		else if(arrFX[0].equals("sxn")) {
+		else if(arrFX[0].equals("sin^-1")) {
 			
 			fxdx = fh.invSinDeriv();
 			displace = fh.invSinDisplace();
 			
 		}//else if
-		else if(arrFX[0].equals("cxs")) {
+		else if(arrFX[0].equals("cos^-1")) {
 			
 			fxdx = fh.invCosDeriv();
 			displace = fh.invCosDisplace();
 			
 		}//else if
-		else if(arrFX[0].equals("txn")) {
+		else if(arrFX[0].equals("tan^-1")) {
 			
 			fxdx = fh.invTanDeriv();
 			displace = fh.invTanDisplace();
@@ -70,7 +70,7 @@ public class ProductRule implements DerivativeRule{
 		}//else if
 		else{}//else
 		
-		fxdx = fxdx.substring(0, displace + 1) + arrFX[1] + fxdx.substring(displace + 1);
+		fxdx = "(" + fxdx.substring(0, displace) + arrGX[1].substring(1, arrFX[1].length()-1) + fxdx.substring(displace) + ")";
 		
 		//check what function the gx is
 		if(arrGX[0].equals("sin")) {
@@ -91,19 +91,19 @@ public class ProductRule implements DerivativeRule{
 			displace = fh.tanDisplace();
 			
 		}//else if
-		else if(arrGX[0].equals("sxn")) {
+		else if(arrGX[0].equals("sin^-1")) {
 			
 			gxdx = fh.invSinDeriv();
 			displace = fh.invSinDisplace();
 			
 		}//else if
-		else if(arrGX[0].equals("cxs")) {
+		else if(arrGX[0].equals("cos^-1")) {
 			
 			gxdx = fh.invCosDeriv();
 			displace = fh.invCosDisplace();
 			
 		}//else if
-		else if(arrGX[0].equals("txn")) {
+		else if(arrGX[0].equals("tan^-1")) {
 			
 			gxdx = fh.invTanDeriv();
 			displace = fh.invTanDisplace();
@@ -111,7 +111,7 @@ public class ProductRule implements DerivativeRule{
 		}//else if
 		else {}//else
 		
-		gxdx = gxdx.substring(0, displace + 1) + arrGX[1] + gxdx.substring(displace + 1);
+		gxdx = "("+ gxdx.substring(0, displace) + arrGX[1].substring(1, arrGX[1].length()-1) + gxdx.substring(displace) + ")";
 		
 		//calculate the inside fx () is there is something
 		if(!(arrFX[1].equals("(x)"))) {

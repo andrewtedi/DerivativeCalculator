@@ -41,8 +41,19 @@ public class DivisionRule implements DerivativeRule{
 			
 		}//else
 		
-		//calc using product rule now that is a product
-		result = product.calculateRule(fx, gx);
+		if(fx.equals("1") && gx.contains("x")) {
+			
+			//calculate the denominator since the numerator is a 1
+			result = fx + "/";
+			
+			PowerRule pr = new PowerRule();
+			result += pr.calculateRule(gx);
+			
+		}//if
+		else {
+			//calc using product rule now that is a product
+			result = product.calculateRule(fx, gx);
+		}//else
 		
 		//resulting derivative
 		return result;
