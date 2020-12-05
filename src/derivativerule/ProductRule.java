@@ -124,7 +124,6 @@ public class ProductRule implements DerivativeRule{
 		//calculate the inside gx () is there is something
 		if(!(arrGX[1].equals("(x)"))){
 			if(arrGX[1].contains(")")){
-				System.out.println(arrFX[1]);
 				arrGX[1] = arrGX[1].replaceAll("[()]", "");	//get rid of any ()
 				PowerRule pf = new PowerRule();
 				gxdx = "(" + pf.calculateRule(arrGX[1]) + ")" + gxdx;
