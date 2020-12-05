@@ -23,7 +23,7 @@ public class ChainRule implements DerivativeRule {
 	 * @param String out is for the outside function, String in is for the inside function
 	 * @return String is the derivative resulting from the chain function
 	 */
-	public String calculateRule(String out, String in) throws NumberFormatException, StringIndexOutOfBoundsException {
+	public String calculateRule(String out, String in) throws NumberFormatException {
 		
 		FunctionHandler fh = new FunctionHandler();
 
@@ -60,49 +60,120 @@ public class ChainRule implements DerivativeRule {
 			else if(result.equals("(0)"))
 				return "0";
 		}//else
-		int addedLength = result.length();
 		//now we have (gx')
-		
+		String outoutside = "";
+		int i = 0;
+		if(!out.matches("[0-9]+")) {
+			while(Character.isDigit(out.charAt(i)) || out.charAt(i) == 'i' || out.charAt(i) == 'p') {
+				if(out.charAt(i) == 'p') {
+					if(!out.contains("pi"))
+						throw new NumberFormatException();
+				}
+				outoutside += Character.toString(out.charAt(i));
+				i++;
+				if(i == out.length())
+					break;
+			}
+			out = out.substring(i);
+		}
+		int addedLength = result.length();
 		//next term- fx'
 		int displace = 0;
 		if(out.equals("sin")) {	//function is sin
-			result += fh.sinDeriv();
-			displace = fh.sinDisplace();
+			
+			if(!outoutside.equals("")) {
+				result += '(';
+				result += fh.sinDeriv();
+				result += ')';
+				displace = fh.sinDisplace() + 1;
+			}
+			else {
+				result += fh.sinDeriv();
+				displace = fh.sinDisplace();
+			}
 		
 		}//if
 		else if(out.equals("cos")) { //function is cos
 			
-			result += fh.cosDeriv();
-			displace = fh.cosDisplace();
+			if(!outoutside.equals("")) {
+				result += '(';
+				result += fh.cosDeriv();
+				result += ')';
+				displace = fh.cosDisplace() + 1;
+			}
+			else {
+				result += fh.cosDeriv();
+				displace = fh.cosDisplace();
+			}
 			
 		}//else if
 		else if(out.equals("tan")) { //function is tan
 			
-			result += fh.tanDeriv();
-			displace = fh.tanDisplace();
+			if(!outoutside.equals("")) {
+				result += '(';
+				result += fh.tanDeriv();
+				result += ')';
+				displace = fh.tanDisplace() + 1;
+			}
+			else {
+				result += fh.tanDeriv();
+				displace = fh.tanDisplace();
+			}
 			
 		}//else if
 		else if(out.equals("sin^-1")) { //function is sin^-1
 			
-			result += fh.invSinDeriv();
-			displace = fh.invSinDisplace();
+			if(!outoutside.equals("")) {
+				result += '(';
+				result += fh.invSinDeriv();
+				result += ')';
+				displace = fh.invSinDisplace() + 1;
+			}
+			else {
+				result += fh.invSinDeriv();
+				displace = fh.invSinDisplace();
+			};
 			
 		}//else if
 		else if(out.equals("cos^-1")) { //function is cos^-1
 			
-			result += fh.invCosDeriv();
-			displace = fh.invCosDisplace();
+			if(!outoutside.equals("")) {
+				result += '(';
+				result += fh.invCosDeriv();
+				result += ')';
+				displace = fh.invCosDisplace() + 1;
+			}
+			else {
+				result += fh.invCosDeriv();
+				displace = fh.invCosDisplace();
+			}
 			
 		}//else if
 		else if(out.equals("tan^-1")) { //function is tan^-1
 			
-			result += fh.invTanDeriv();
-			displace = fh.invTanDisplace();
+			if(!outoutside.equals("")) {
+				result += '(';
+				result += fh.invTanDeriv();
+				result += ')';
+				displace = fh.invTanDisplace() + 1;
+			}
+			else {
+				result += fh.invTanDeriv();
+				displace = fh.invTanDisplace();
+			}
 			
 		}//else if
 		else if(out.contains("ln")) { //function is ln
-			result += fh.lnDeriv();
-			displace = fh.lnDisplace();
+			if(!outoutside.equals("")) {
+				result += '(';
+				result += fh.lnDeriv();
+				result += ')';
+				displace = fh.lnDisplace() + 1;
+			}
+			else {
+				result += fh.lnDeriv();
+				displace = fh.lnDisplace();
+			}
 		}//else if
 		else if(out.contains("sqrt")) { //function is sqrt
 			result += fh.sqrtDeriv();
@@ -137,7 +208,7 @@ public class ChainRule implements DerivativeRule {
 			result += ("(" + in + ")");
 		else
 			result = result.substring(0, displace + addedLength) + in + result.substring(displace + addedLength);
-		return result;	//return gx' fx'(gx)
+		return outoutside + result;	//return gx' fx'(gx)
 	}//calculateRule	
 
 }//ChainRule
