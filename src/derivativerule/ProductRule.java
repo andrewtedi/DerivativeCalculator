@@ -69,8 +69,8 @@ public class ProductRule implements DerivativeRule{
 			
 		}//else if
 		else{}//else
-		
-		fxdx = "(" + fxdx.substring(0, displace) + arrGX[1].substring(1, arrFX[1].length()-1) + fxdx.substring(displace) + ")";
+
+		fxdx = "(" + fxdx.substring(0, displace) + arrFX[1].substring(1, arrFX[1].length()-1) + fxdx.substring(displace) + ")";
 		
 		//check what function the gx is
 		if(arrGX[0].equals("sin")) {
@@ -117,16 +117,17 @@ public class ProductRule implements DerivativeRule{
 		if(!(arrFX[1].equals("(x)"))) {
 			arrFX[1] = arrFX[1].replaceAll("[()]", "");	//get rid of any ()
 			PowerRule pf = new PowerRule();
-			fxdx += "(" + pf.calculateRule(arrFX[1]) + ")";
+			fxdx = "(" + pf.calculateRule(arrFX[1]) + ")" + fxdx;
 		}//if
 		else {}//else
 		
 		//calculate the inside gx () is there is something
 		if(!(arrGX[1].equals("(x)"))){
 			if(arrGX[1].contains(")")){
+				System.out.println(arrFX[1]);
 				arrGX[1] = arrGX[1].replaceAll("[()]", "");	//get rid of any ()
 				PowerRule pf = new PowerRule();
-				gxdx += "(" + pf.calculateRule(arrGX[1]) + ")";
+				gxdx = "(" + pf.calculateRule(arrGX[1]) + ")" + gxdx;
 			}//if
 			else {}//else
 		}//if
