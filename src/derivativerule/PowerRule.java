@@ -17,6 +17,11 @@ public class PowerRule implements DerivativeRule{
 	 */
 	@Override
 	public String calculateRule(String st) throws NumberFormatException, StringIndexOutOfBoundsException {
+		String negIfHas = "";
+		if(st.charAt(0) == '-') {
+			st = st.substring(1);
+			negIfHas = "-";
+		}
 		
 		//result to return as the answer
 		String result = "";	
@@ -35,7 +40,7 @@ public class PowerRule implements DerivativeRule{
 			//check if there is an x
 			if(!st.contains("x")) {
 				// check if the input is all numbers or has e or pi at the end
-				if(st.matches("[0-9]+") || st.matches("[0-9]*[e]") || st.matches("[0-9]*(pi)") || st.matches("[0-9]*(epi)") || st.matches("[0-9]*(pie)") || st.matches("[0-9]*(e\\^)[0-9]+"))
+				if(st.matches("[-]?[0-9]+") || st.matches("[-]?[0-9]*[e]") || st.matches("[-]?[0-9]*(pi)") || st.matches("[-]?[0-9]*(epi)") || st.matches("[-]?[0-9]*(pie)") || st.matches("[-]?[0-9]*(e\\^)[0-9]+"))
 					return "0";
 			}
 			
@@ -82,7 +87,7 @@ public class PowerRule implements DerivativeRule{
 		}//else
 		
 		//final derivative
-		return result;
+		return negIfHas + result;
 		
 	}//calculateRule
 	

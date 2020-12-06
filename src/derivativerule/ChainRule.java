@@ -63,10 +63,14 @@ public class ChainRule implements DerivativeRule {
 		//now we have (gx')
 		String outoutside = "";
 		int i = 0;
-		if(!out.matches("[0-9]+")) {
-			while(Character.isDigit(out.charAt(i)) || out.charAt(i) == 'i' || out.charAt(i) == 'p') {
+		if(!out.matches("[-]?[0-9]+")) {
+			while(Character.isDigit(out.charAt(i)) || out.charAt(i) == 'i' || out.charAt(i) == 'p'|| out.charAt(i) == '-') {
 				if(out.charAt(i) == 'p') {
 					if(!out.contains("pi"))
+						throw new NumberFormatException();
+				}
+				if(out.charAt(i) == '-') {
+					if(i != 0)
 						throw new NumberFormatException();
 				}
 				outoutside += Character.toString(out.charAt(i));
@@ -75,6 +79,7 @@ public class ChainRule implements DerivativeRule {
 					break;
 			}
 			out = out.substring(i);
+			System.out.println(outoutside);
 		}
 		int addedLength = result.length();
 		//next term- fx'
