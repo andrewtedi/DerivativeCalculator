@@ -26,6 +26,12 @@ public class DivisionRule implements DerivativeRule{
 		
 		ProductRule product = new ProductRule();
 		
+		//check for trig func division- not supported
+		if((gx.contains("sin"))||(gx.contains("cos"))||(gx.contains("tan"))){
+			throw new NumberFormatException("Bad input: Trig division derivatives not supported");
+		}//if
+		else {}//else
+		
 		//check if the second function has any exp, and add ^-1 to bring it out of division
 		if(gx.contains("^")) {
 			

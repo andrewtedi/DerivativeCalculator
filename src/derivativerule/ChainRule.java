@@ -26,7 +26,16 @@ public class ChainRule implements DerivativeRule {
 	public String calculateRule(String out, String in) throws NumberFormatException {
 		
 		FunctionHandler fh = new FunctionHandler();
-
+		
+		//check for inner function- not handled
+		if(in.contains("sqrt") || in.contains("cos") || in.contains("sin") 
+				|| in.contains("tan") || in.contains("ln") || in.contains("e^") || in.contains("sin^") 
+				|| in.contains("cos^") || in.contains("tan^")) {
+			
+			throw new NumberFormatException("Bad input: Inner function chain rule derivatives not supported");
+		}//if
+		else {}//else
+		
 		//string out = fx, string in = gx
 		//result from rule
 		String result = "";

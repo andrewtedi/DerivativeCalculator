@@ -34,7 +34,10 @@ public class Calculate {
 			output = createOutput();
 		}
 		catch(NumberFormatException e) {
-			throw new Exception("Bad input: Formatting error");
+			if(e.getMessage().isEmpty())
+				throw new Exception("Bad input: Formatting error");
+			else
+				throw new Exception(e.getMessage());
 		}
 		catch(StringIndexOutOfBoundsException e) {
 			throw new Exception("Bad input: Formatting error");
@@ -108,7 +111,7 @@ public class Calculate {
 	}
 	
 	// use RuleHandler to derive terms in the queue
-	private void deriveTerms() {
+	private void deriveTerms() throws Exception {
 		while(!queue.isEmpty()) {
 			String term = queue.remove();
 			String newTerm = rh.derive(term);
