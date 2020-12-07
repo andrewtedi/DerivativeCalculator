@@ -82,6 +82,8 @@ public class Calculate {
             }
 			// use operands to split terms if the operand is outside parentheses
 			if(input.charAt(i) == '+' || (input.charAt(i) == '-' && (i != 0 && input.charAt(i-1) != '^'))) {
+				if(addedOperator)
+					throw new Exception("Bad input: Continuous operators");
 				if(parenthesesStack.empty()) {
 					queue.add(input.substring(start, i));
 					start = i;
@@ -92,13 +94,18 @@ public class Calculate {
 				else
 					addedOperator = false;
 			}
+			else if(input.charAt(i) == '*' || input.charAt(i) == '/') {
+				if(addedOperator)
+					throw new Exception("Bad input: Continuous operators");
+				addedOperator = true;
+			}
 			else
 				addedOperator = false;
 		}
 		queue.add(input.substring(start, input.length()));
 		// check to see if equation has extra parentheses or operator
 		if(!parenthesesStack.empty() || addedOperator)
-			throw new Exception("Bad input: Doesn't have an ending parentheses or has multiple operators");
+			throw new Exception("Bad input: Doesn't have an ending parentheses or ends with an operator");
 	}
 	
 	// determines if the character in the input is acceptable

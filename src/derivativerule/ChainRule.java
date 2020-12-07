@@ -88,7 +88,6 @@ public class ChainRule implements DerivativeRule {
 					break;
 			}
 			out = out.substring(i);
-			System.out.println(outoutside);
 		}
 		int addedLength = result.length();
 		//next term- fx'

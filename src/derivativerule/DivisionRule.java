@@ -32,6 +32,12 @@ public class DivisionRule implements DerivativeRule{
 		}//if
 		else {}//else
 		
+		//check for just a number
+		if(fx.matches("[0-9]+") && gx.matches("[0-9]+")) {
+			return "0";
+		}//if
+		else {}//else
+		
 		//check if the second function has any exp, and add ^-1 to bring it out of division
 		if(gx.contains("^")) {
 			
