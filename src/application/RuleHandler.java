@@ -49,7 +49,7 @@ public class RuleHandler {
 
 				//now, call product rule
 				ProductRule pr = new ProductRule();
-				result = pr.calculateRule(termSplit[0],termSplit[2]);
+				result = pr.calculateRule(termSplit[0].replace("*", ""), termSplit[2].replace("*", ""));
 
 			}//else if
 			else if(term.contains("*")) {
